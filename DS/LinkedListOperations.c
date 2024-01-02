@@ -48,7 +48,7 @@ void insertAtEnd()
 
 void insertAfterValue()
 {
-    int x, y;
+    int x;
     if (h == NULL)
     {
         printf("No Value Present\n");
@@ -58,19 +58,26 @@ void insertAfterValue()
         printf("Enter the value after which data is to be inserted\n");
         scanf("%d", &x);
         p1 = h;
-        while (p1->data != x)
+        while (p1 != NULL)
         {
-            p1 = p1->next;
-            if (p1->next == NULL)
+            if (p1->data == x)
             {
-                printf("The value %d not found", x);
+                break;
             }
+            p1 = p1->next;
         }
-        p = (struct node *)malloc(sizeof(struct node));
-        p->next = p1->next;
-        printf("Enter the data to be inserted: ");
-        scanf("%d", &p->data);
-        p1->next = p;
+        if (p1 == NULL)
+        {
+            printf("The value %d not found", x);
+        }
+        else
+        {
+            p = (struct node *)malloc(sizeof(struct node));
+            p->next = p1->next;
+            printf("Enter the data to be inserted: ");
+            scanf("%d", &p->data);
+            p1->next = p;
+        }
     }
 }
 
@@ -90,7 +97,7 @@ void insertAfterIndex()
         for (int i = 1; i < x; i++)
         {
             p1 = p1->next;
-            if (p1->next == NULL)
+            if (p1 == NULL)
             {
                 printf("The index %d not found", x);
             }
@@ -105,22 +112,93 @@ void insertAfterIndex()
 
 void insertBeforeValue()
 {
-    printf("Test");
+    int x, y;
+    struct node *previous;
+    if (h == NULL)
+    {
+        printf("No Data present");
+    }
+    else
+    {
+        printf("Enter the value before which data is to be inserted\n");
+        scanf("%d", &x);
+        p = (struct node *)malloc(sizeof(struct node));
+        p1 = h;
+        while (p1->next != NULL)
+        {
+
+            p1 = p1->next;
+        }
+        p1->next = p;
+        p->next = previous->next;
+        printf("Enter the data: ");
+        scanf("%d", &p->data);
+    }
 }
 
 void insertBeforeIndex()
 {
-    printf("Test");
+    // int x, y;
+    // struct node *p2;
+    if (h == NULL)
+    {
+        printf("No Data Present\n");
+    }
+    // else
+    // {
+    //     printf("Enter the index before which data is to be inserted\n");
+    //     scanf("%d", &x);
+    //     p = (struct node *)malloc(sizeof(struct node));
+    //     p1 = h;
+    //     p2 = h;
+    //     for (int i = 1; i < x; i++)
+    //     {
+    //         p1->next = p2;
+    //         p2 = p2->next;
+    //     }
+    //     p1->next = p;
+    //     p->next = p2->next;
+    //     printf("Enter the data: ");
+    //     scanf("%d", &p->data);
+    // }
 }
 
 void deleteHead()
 {
-    printf("Test");
+
+    if (h == NULL)
+    {
+        printf("No Data Present\n");
+    }
+    else
+    {
+        p1 = h->next;
+        free(h);
+        h = p1;
+        printf("Head Deleted\n");
+    }
 }
 
 void deleteTail()
 {
-    printf("Test");
+    struct node *p2;
+    if (h == NULL)
+    {
+        printf("No Data Present\n");
+    }
+    else
+    {
+        p1 = h;
+        p2 = h;
+        while (p2->next != NULL)
+        {
+            p1 = p2;
+            p2 = p2->next;
+        }
+        p1->next = NULL;
+        free(p2);
+        printf("Tail Deleted");
+    }
 }
 
 void deleteAfterValue()
@@ -167,11 +245,12 @@ void main()
     int c;
     while (1)
     {
-        printf("\nPRESS ANY OPTION\n");
-        printf("1.Insert At Begining \t 2.Insert At End \t 3.Insert After Value \t 4.Insert After Index\n");
-        printf("5.Insert Before Value \t 6.Insert Before Index \t 7.Delete Head \t 8.Delete Tail \n");
-        printf("\t 9.Delete After Value \t 10.Delete After Index\t 11.Detele Before Value \t 12.Delete Before Index \n");
-        printf("99.Print All Data \t 0.Exit\n");
+        printf("\n-------------------------------------------------- PRESS ANY OPTION -----------------------------------------------------\n");
+        printf("|\t1.Insert At Begining \t 2.Insert At End \t 3.Insert After Value \t\t 4.Insert After Index \t\t|\n");
+        printf("|\t5.Insert Before Value \t 6.Insert Before Index \t 7.Delete Head \t\t\t 8.Delete Tail \t\t\t|\n");
+        printf("|\t9.Delete After Value \t 10.Delete After Index\t 11.Delete Before Value \t 12.Delete Before Index\t\t|\n");
+        printf("|\t13.Print All Data \t 0.Exit \t\t\t\t\t\t\t\t\t\t|\n");
+        printf("-------------------------------------------------------------------------------------------------------------------------\n");
         scanf("%d", &c);
         switch (c)
         {

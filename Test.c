@@ -1,27 +1,70 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
-void countingSort(int arr_count, int *arr)
+struct node
 {
-    int result[arr_count];
+    int data;
+    struct node *next;
+};
 
-    for (int i = 0; i < arr_count; i++)
+struct node *h, *p, *p1, *a, *b, *c, *d, *e;
+
+void printAllData()
+{
+    p1 = h;
+    if (h == NULL)
     {
-        result[i] = 0;
+        printf("No Data Present\n");
     }
 
-    for (int i = 0; i < arr_count; i++)
+    while (p1 != NULL)
     {
-        int value = arr[i];
-        result[value]++;
+        printf("%d ", p1->data);
+        p1 = p1->next;
+        if (p1 == NULL)
+        {
+            break;
+        }
     }
 }
 
 void main()
 {
-    int arr_count = 100;
-    int arr[] = {63, 25, 73, 1, 98, 73, 56, 84, 86, 57, 16, 83, 8, 25, 81, 56, 9, 53, 98, 67, 99, 12, 83, 89, 80, 91, 39, 86, 76, 85, 74, 39, 25, 90, 59, 10, 94, 32, 44, 3, 89, 30, 27, 79, 46, 96, 27, 32, 18, 21, 92, 69, 81, 40, 40, 34, 68, 78, 24, 87, 42, 69, 23, 41, 78, 22, 6, 90, 99, 89, 50, 30, 20, 1, 43, 3, 70, 95, 33, 46, 44, 9, 69, 48, 33, 60, 65, 16, 82, 67, 61, 32, 21, 79, 75, 75, 13, 87, 70, 33};
+    int x;
+    a = (struct node *)malloc(sizeof(struct node));
+    b = (struct node *)malloc(sizeof(struct node));
+    c = (struct node *)malloc(sizeof(struct node));
+    d = (struct node *)malloc(sizeof(struct node));
+    e = (struct node *)malloc(sizeof(struct node));
 
-    countingSort(arr_count, arr);
+    h = a;
+    a->next = b;
+    b->next = c;
+    c->next = d;
+    d->next = e;
+    e->next = NULL;
+
+    a->data = 1;
+    b->data = 2;
+    c->data = 3;
+    d->data = 4;
+    e->data = 5;
+
+    printf("%d\n", a->data);
+    printf("%d\n", a);
+    printf("%d\n", a->next);
+    printf("%d\n", a->next->data);
+
+    while (1)
+    {
+        printf("\t1.Print all\n");
+        scanf("%d", &x);
+        switch (x)
+        {
+
+        case 1:
+            printAllData();
+            break;
+        }
+    }
 }
