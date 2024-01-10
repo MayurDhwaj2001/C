@@ -5,7 +5,6 @@ void main()
 
     int arr1[3][3], i, j, k;
     int arr2[3][3];
-    int sum[3][3];
     int pro[3][3];
     // Scan Array 1
     printf("Enter 9 numbers of Array 1 \n");
