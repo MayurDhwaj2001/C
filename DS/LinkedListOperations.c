@@ -148,8 +148,8 @@ void insertBeforeValue()
             p = (struct node *)malloc(sizeof(struct node));
             printf("Enter the data: ");
             scanf("%d", &p->data);
-            previous->next = p;
             p->next = p1;
+            previous->next = p;
         }
     }
 }
@@ -164,7 +164,7 @@ void insertBeforeIndex()
     }
     else
     {
-        printf("Insert Before Index: ");
+        printf("Enter the value before which data is to be inserted: ");
         scanf("%d", &x);
         p1 = h;
         while (p1 != NULL)
@@ -179,15 +179,15 @@ void insertBeforeIndex()
         }
         if (p1 == NULL)
         {
-            printf("ERROR: The index %d not found\n", x);
+            printf("ERROR: The value %d not found\n", x);
         }
         else
         {
             p = (struct node *)malloc(sizeof(struct node));
             printf("Enter the data: ");
             scanf("%d", &p->data);
-            previous->next = p;
             p->next = p1;
+            previous->next = p;
         }
     }
 }
