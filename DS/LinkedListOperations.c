@@ -186,8 +186,16 @@ void insertBeforeIndex()
             p = (struct node *)malloc(sizeof(struct node));
             printf("Enter the data: ");
             scanf("%d", &p->data);
-            p->next = p1;
-            previous->next = p;
+            if (p1 == h)
+            {
+                p->next = h;
+                h = p;
+            }
+            else
+            {
+                p->next = p1;
+                previous->next = p;
+            }
         }
     }
 }
