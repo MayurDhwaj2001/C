@@ -15,18 +15,21 @@ void insertAtBegining()
     p = (struct node *)malloc(sizeof(struct node));
     printf("Enter Data: ");
     scanf("%d", &p->data);
-    p->pre = NULL;
 
     if (h == NULL && t == NULL)
     {
-        p->next = NULL;
         h = p;
+        p->pre = NULL;
+        p->next = NULL;
         t = p;
     }
     else
     {
+        p->pre = NULL;
         p->next = h;
+        h->pre = p;
         h = p;
+        t = h->next;
     }
 }
 
@@ -84,12 +87,12 @@ void insertAfterValue()
         else
         {
             p = (struct node *)malloc(sizeof(struct node));
-            p->next = p2;
+            p->next = p1->next;
             printf("Enter the data to be inserted: ");
             scanf("%d", &p->data);
             if (p1->next == NULL)
             {
-                p->next = NULL;
+                //   p->next = NULL;
                 t = p;
             }
             else
@@ -105,47 +108,49 @@ void insertAfterValue()
 
 void insertAfterIndex()
 {
-    printf("Test");
-}
-
-void insertBeforeValue()
-{
-    printf("Test");
-}
-
-void insertBeforeIndex()
-{
-    printf("Test");
-}
-
-void deleteHead()
-{
-    printf("Test");
-}
-
-void deleteTail()
-{
-    printf("Test");
-}
-
-void deleteAfterValue()
-{
-    printf("Test");
-}
-
-void deleteAfterIndex()
-{
-    printf("Test");
-}
-
-void deleteBeforeValue()
-{
-    printf("Test");
-}
-
-void deleteBeforeIndex()
-{
-    printf("Test");
+    int index, y = 1;
+    if (h == NULL && t == NULL)
+    {
+        printf("Link List Present\n");
+    }
+    else
+    {
+        printf("Enter index to Insert After: ");
+        scanf("%d", &index);
+        p1 = h;
+        while (p1 != NULL)
+        {
+            if (y == index)
+            {
+                break;
+            }
+            y++;
+            p1 = p1->next;
+        }
+        if (p1 == NULL)
+        {
+            printf("The index %d not found\n", index);
+        }
+        else
+        {
+            p = (struct node *)malloc(sizeof(struct node));
+            p->next = p1->next;
+            printf("Enter the data to be inserted: ");
+            scanf("%d", &p->data);
+            if (p1->next == NULL)
+            {
+                //   p->next = NULL;
+                t = p;
+            }
+            else
+            {
+                p2 = p1->next;
+                p2->pre = p;
+            }
+            p1->next = p;
+            p->pre = p1;
+        }
+    }
 }
 
 void checkForHeadTail()
@@ -158,19 +163,19 @@ void checkForHeadTail()
     {
         if (h->pre == NULL)
         {
-            printf("OK Head\n");
+            printf("OK Head : %d\n", h->data);
         }
         else
         {
-            printf("ERROR: Head\n");
+            printf("ERROR: Head %d\n", h->data);
         }
         if (t->next == NULL)
         {
-            printf("OK Tail\n");
+            printf("OK Tail : %d\n", t->data);
         }
         else
         {
-            printf("ERROR: Head\n");
+            printf("ERROR: Tail %d\n", t->data);
         }
     }
 }
@@ -203,8 +208,6 @@ void main()
     {
         printf("\n-------------------------------------------------- PRESS ANY OPTION -----------------------------------------------------\n");
         printf("|\t1.Insert At Begining \t 2.Insert At End \t 3.Insert After Value \t\t 4.Insert After Index \t\t|\n");
-        printf("|\t5.Insert Before Value \t 6.Insert Before Index \t 7.Delete Head \t\t\t 8.Delete Tail \t\t\t|\n");
-        printf("|\t9.Delete After Value \t 10.Delete After Index\t 11.Delete Before Value \t 12.Delete Before Index\t\t|\n");
         printf("|\t13.Print All Data \t 14.Check Head & Tail \t 0.Exit \t\t\t\t\t\t\t|\n");
         printf("-------------------------------------------------------------------------------------------------------------------------\n");
         printf("Your Option: ");
@@ -225,38 +228,6 @@ void main()
 
         case 4:
             insertAfterIndex();
-            break;
-
-        case 5:
-            insertBeforeValue();
-            break;
-
-        case 6:
-            insertBeforeIndex();
-            break;
-
-        case 7:
-            deleteHead();
-            break;
-
-        case 8:
-            deleteTail();
-            break;
-
-        case 9:
-            deleteAfterValue();
-            break;
-
-        case 10:
-            deleteAfterIndex();
-            break;
-
-        case 11:
-            deleteBeforeValue();
-            break;
-
-        case 12:
-            deleteBeforeIndex();
             break;
 
         case 13:

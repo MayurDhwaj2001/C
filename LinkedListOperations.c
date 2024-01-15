@@ -81,43 +81,6 @@ void insertAfterValue()
     }
 }
 
-void insertAfterIndex()
-{
-    int x, y = 1;
-
-    if (h == NULL)
-    {
-        printf("ERROR: No Value Present");
-    }
-    else
-    {
-        printf("Enter the Index after which data is to be inserted: ");
-        scanf("%d", &x);
-        p1 = h;
-        while (p1 != NULL)
-        {
-            if (y == x)
-            {
-                break;
-            }
-            y++;
-            p1 = p1->next;
-        }
-        if (p1 == NULL)
-        {
-            printf("ERROR: The index %d not found\n", x);
-        }
-        else
-        {
-            p = (struct node *)malloc(sizeof(struct node));
-            p->next = p1->next;
-            printf("Enter the data to be inserted: ");
-            scanf("%d", &p->data);
-            p1->next = p;
-        }
-    }
-}
-
 void insertBeforeValue()
 {
     int x;
@@ -151,52 +114,6 @@ void insertBeforeValue()
             scanf("%d", &p->data);
             p->next = p1;
             previous->next = p;
-        }
-    }
-}
-
-void insertBeforeIndex()
-{
-    int x, y = 1;
-    struct node *previous;
-    if (h == NULL)
-    {
-        printf("ERROR: No Data present\n");
-    }
-    else
-    {
-        printf("Enter the value before which data is to be inserted: ");
-        scanf("%d", &x);
-        p1 = h;
-        while (p1 != NULL)
-        {
-            if (y == x)
-            {
-                break;
-            }
-            y++;
-            previous = p1;
-            p1 = p1->next;
-        }
-        if (p1 == NULL)
-        {
-            printf("ERROR: The value %d not found\n", x);
-        }
-        else
-        {
-            p = (struct node *)malloc(sizeof(struct node));
-            printf("Enter the data: ");
-            scanf("%d", &p->data);
-            if (p1 == h)
-            {
-                p->next = h;
-                h = p;
-            }
-            else
-            {
-                p->next = p1;
-                previous->next = p;
-            }
         }
     }
 }
@@ -289,49 +206,6 @@ void deleteAfterValue()
     }
 }
 
-void deleteAfterIndex()
-{
-    int x, y = 1;
-    if (h == NULL)
-    {
-        printf("ERROR: No Value Present");
-    }
-    else
-    {
-        printf("Enter the value after which node is to be deleted: ");
-        scanf("%d", &x);
-        p1 = h;
-        while (p1 != NULL)
-        {
-            if (y == x)
-            {
-                break;
-            }
-            y++;
-            p1 = p1->next;
-        }
-        if (p1 == NULL)
-        {
-            printf("ERROR: The value %d not found\n", x);
-        }
-        else
-        {
-            if (p1->next == NULL)
-            {
-                printf("ERROR: %d is the last Node", x);
-            }
-            else
-            {
-                struct node *p2;
-                p2 = p1->next;
-                p1->next = p1->next->next;
-                free(p2);
-                printf("Node Deleted\n");
-            }
-        }
-    }
-}
-
 void deleteBeforeValue()
 {
     int x;
@@ -391,66 +265,6 @@ void deleteBeforeValue()
     }
 }
 
-void deleteBeforeIndex()
-{
-    int x, y = 1;
-    struct node *previous, *p2;
-    if (h == NULL)
-    {
-        printf("ERROR: No Data present\n");
-    }
-    else
-    {
-        printf("Enter the index before which data is to be deleted: ");
-        scanf("%d", &x);
-        p1 = h;
-        while (p1 != NULL)
-        {
-            if (y == x)
-            {
-                break;
-            }
-            if (previous != NULL)
-            {
-                p2 = previous;
-            }
-            y++;
-            previous = p1;
-            p1 = p1->next;
-        }
-        if (p1 == NULL)
-        {
-            printf("ERROR: The index %d not found\n", x);
-        }
-        else
-        {
-            if (h == p2)
-            {
-                h = previous;
-                p2->next = p1;
-                free(previous);
-                printf("Node Deleted\n");
-            }
-            else if (h == previous)
-            {
-                h = p1;
-                free(previous);
-                printf("Node Deleted\n");
-            }
-            else if (h == p1)
-            {
-                printf("ERROR: Can't Deleted\n");
-            }
-            else
-            {
-                p2->next = p1;
-                free(previous);
-                printf("Node Deleted\n");
-            }
-        }
-    }
-}
-
 void printAllData()
 {
     p1 = h;
@@ -478,9 +292,8 @@ void main()
     while (1)
     {
         printf("\n-------------------------------------------------- PRESS ANY OPTION -----------------------------------------------------\n");
-        printf("|\t1.Insert At Begining \t 2.Insert At End \t 3.Insert After Value \t\t 4.Insert After Index \t\t|\n");
-        printf("|\t5.Insert Before Value \t 6.Insert Before Index \t 7.Delete Head \t\t\t 8.Delete Tail \t\t\t|\n");
-        printf("|\t9.Delete After Value \t 10.Delete After Index\t 11.Delete Before Value \t 12.Delete Before Index\t\t|\n");
+        printf("|\t1.Insert At Begining \t 2.Insert At End \t 3.Insert After Value\t 4.Insert Before Value \t\t\t|\n");
+        printf("|\t5.Delete Head \t\t 6.Delete Tail \t\t 7. Delete After Value \t 8.Delete Before Value \t\t\t|\n");
         printf("|\t13.Print All Data \t 0.Exit \t\t\t\t\t\t\t\t\t\t|\n");
         printf("-------------------------------------------------------------------------------------------------------------------------\n");
         printf("Your Option: ");
@@ -500,47 +313,32 @@ void main()
             break;
 
         case 4:
-            insertAfterIndex();
-            break;
-
-        case 5:
             insertBeforeValue();
             break;
 
-        case 6:
-            insertBeforeIndex();
-            break;
-
-        case 7:
+        case 5:
             deleteHead();
             break;
 
-        case 8:
+        case 6:
             deleteTail();
             break;
 
-        case 9:
+        case 7:
             deleteAfterValue();
             break;
 
-        case 10:
-            deleteAfterIndex();
-            break;
-
-        case 11:
+        case 8:
             deleteBeforeValue();
             break;
 
-        case 12:
-            deleteBeforeIndex();
-            break;
-
-        case 13:
+        case 9:
             printAllData();
             break;
 
-        case 0:
+        case 10:
             exit(0);
+            break;
 
         default:
             printf("ERROR: Invalid Input\n");
